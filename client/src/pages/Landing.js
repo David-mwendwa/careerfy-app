@@ -1,7 +1,7 @@
 import React from 'react';
 // import logo from '../assets/images/logo.svg';
 import main from '../assets/images/main.svg';
-import styled from 'styled-components';
+import Wrapper from '../assets/wrappers/Testing';
 
 const Landing = () => {
   return (
@@ -23,47 +23,10 @@ const Landing = () => {
           </p>
           <button className='btn btn-hero'>Login/Register</button>
         </div>
-        <img src={main} alt='job hunt' className='img main=img' />
+        <img src={main} alt='job hunt' className='img main-img' />
       </div>
     </Wrapper>
   );
 };
-
-const Wrapper = styled.main`
-  nav {
-    width: var(--fluid-width);
-    max-width: var(--max-width);
-    margin: 0 auto;
-    height: var(--nav-height);
-    display: flex;
-    align-items: center;
-    font-weight: bolder;
-    color: var(--primary-500);
-  }
-  .page {
-    min-height: calc(100vh - var(--nav-height));
-    display: grid;
-    align-items: center;
-    margin-top: -3rem;
-  }
-  h1 {
-    font-weight: 700;
-    span {
-      color: var(--primary-500);
-    }
-  }
-  p {
-    color: var(--grey-500);
-  }
-  .main-img {
-    display: none;
-  }
-  @media (min-width: 992px) {
-    .page {
-      grid-template-columns: 1fr 1fr;
-      column-gap: 3rem;
-    }
-  }
-`;
 
 export default Landing;
