@@ -1,9 +1,9 @@
 import User from '../models/User.js';
-import errorHandlerMiddleware from '../middleware/error-handler.js';
+import { StatusCodes } from 'http-status-codes';
 
 const register = async (req, res, next) => {
   const user = await User.create(req.body);
-  res.status(201).json({ status: 'success', user });
+  res.status(StatusCodes.CREATED).json({ status: 'success', user });
 };
 
 const login = async (req, res) => {
