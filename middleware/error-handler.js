@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 const errorHandlerMiddleware = async (err, req, res, next) => {
   console.log(err.message);
   const defaultError = {
-    statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+    statusCode: err.statusCode || StatusCodes.INTERNAL_SERVER_ERROR,
     msg: err.message || 'Something went wrong, please try again later',
   };
   // handle missing field error
