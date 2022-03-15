@@ -1,9 +1,10 @@
 import { StatusCodes } from 'http-status-codes';
 
 const errorHandlerMiddleware = async (err, req, res, next) => {
+  console.log(err.message);
   const defaultError = {
     statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
-    msg: 'Something went wrong, please try again later',
+    msg: err.message || 'Something went wrong, please try again later',
   };
   // handle missing field error
   if (err.name === 'ValidationError') {
@@ -12,6 +13,7 @@ const errorHandlerMiddleware = async (err, req, res, next) => {
       .map((item) => item.message)
       .join(', ');
   }
+  // handle unique value error
   if (err.code && err.code === 11000) {
     defaultError.statusCode = StatusCodes.BAD_REQUEST;
     defaultError.msg = `${Object.keys(err.keyValue)} field has to be unique`;
