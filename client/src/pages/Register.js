@@ -47,20 +47,20 @@ const Register = () => {
         {showAlert && <Alert />}
         {!values.isMember && (
           <FormRow
-            text='text'
+            type='text'
             value={values.name}
             name='name'
             handleChange={handleChange}
           />
         )}
         <FormRow
-          text='email'
+          type='email'
           value={values.email}
           name='email'
           handleChange={handleChange}
         />
         <FormRow
-          text='password'
+          type='password'
           value={values.password}
           name='password'
           handleChange={handleChange}
