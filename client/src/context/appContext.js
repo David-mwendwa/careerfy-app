@@ -120,6 +120,7 @@ const AppProvider = ({ children }) => {
         }
       );
       console.log(data);
+      throw(data)
     } catch (error) {
       console.log(error);
     }
