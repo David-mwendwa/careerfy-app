@@ -11,6 +11,9 @@ import {
   LOGIN_USER_ERROR,
   TOGGLE_SIDEBAR,
   LOGOUT_USER,
+  UPDATE_USER_BEGIN,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_ERROR,
 } from './actions';
 
 import reducer from './reducer';
@@ -139,16 +142,19 @@ const AppProvider = ({ children }) => {
   };
 
   const updateUser = async (currentUser) => {
+    dispatch({ type: UPDATE_USER_BEGIN });
     try {
-      const { data } = await authFetch.patch('/auth/updateUser', currentUser, {
-        headers: {
-          Authorization: `Bearer ${initialState.token}`,
-        },
+      const { data } = await authFetch.patch('/auth/updateUser', currentUser);
+      const { user, location, token } = data;
+      dispatch({
+        type: UPDATE_USER_SUCCESS,
+        payload: { user, location, token },
       });
-      console.log(data);
+      addUserToLocalStorage({ user, location, token });
     } catch (error) {
-      console.log(error);
+      dispatch({ type: UPDATE_USER_ERROR, payload: { msg: error.response.data.msg } })
     }
+    clearAlert()
   };
 
   return (
