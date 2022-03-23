@@ -17,15 +17,20 @@ const AddJob = () => {
     statusOptions,
     handleChange,
     clearValues,
+    createJob
   } = useAppContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!position || !company || !jobLocation) {
-      displayAlert();
-      return;
+    // if (!position || !company || !jobLocation) {
+    //   displayAlert();
+    //   return;
+    // }
+    if (isEditing) {
+      // eventually editJob();
+      return
     }
-    console.log('create job');
+    createJob()
   };
 
   const handleJobInput = (e) => {
