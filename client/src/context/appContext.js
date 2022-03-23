@@ -14,6 +14,7 @@ import {
   UPDATE_USER_BEGIN,
   UPDATE_USER_SUCCESS,
   UPDATE_USER_ERROR,
+  HANDLE_CHANGE,
 } from './actions';
 
 import reducer from './reducer';
@@ -71,7 +72,7 @@ const AppProvider = ({ children }) => {
     (error) => {
       console.log(error.response);
       if (error.response.status === 401) {
-        logoutUser()
+        logoutUser();
       }
       return Promise.reject(error);
     }
@@ -167,7 +168,11 @@ const AppProvider = ({ children }) => {
         });
       }
     }
-    clearAlert()
+    clearAlert();
+  };
+
+  const handleChange = ({ name, value }) => {
+    dispatch({ type: HANDLE_CHANGE, payload: { name, value } });
   };
 
   return (
@@ -181,6 +186,7 @@ const AppProvider = ({ children }) => {
         toggleSidebar,
         logoutUser,
         updateUser,
+        handleChange,
       }}>
       {children}
     </AppContext.Provider>
