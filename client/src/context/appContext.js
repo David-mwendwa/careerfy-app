@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useEffect } from 'react';
 import axios from 'axios';
 import {
   DISPLAY_ALERT,
@@ -19,6 +19,8 @@ import {
   CREATE_JOB_BEGIN,
   CREATE_JOB_SUCCESS,
   CREATE_JOB_ERROR,
+  GET_JOBS_BEGIN,
+  GET_JOBS_SUCCESS,
 } from './actions';
 
 import reducer from './reducer';
@@ -48,7 +50,7 @@ const initialState = {
   jobs: [],
   totalJobs: 0,
   numOfPages: 1,
-  page: 1
+  page: 1,
 };
 
 const AppContext = React.createContext();
@@ -208,6 +210,31 @@ const AppProvider = ({ children }) => {
       });
     }
   };
+
+  const getJobs = async () => {
+    let url = `/jobs`;
+    dispatch({ type: GET_JOBS_BEGIN });
+    try {
+      const { data } = await authFetch.get(url);
+      const { jobs, totalJobs, numOfPages } = data;
+      dispatch({
+        type: GET_JOBS_SUCCESS,
+        payload: {
+          jobs,
+          totalJobs,
+          numOfPages,
+        },
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+    clearAlert();
+  };
+
+  useEffect(() => {
+    getJobs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AppContext.Provider
