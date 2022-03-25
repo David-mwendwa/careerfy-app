@@ -9,6 +9,7 @@ const JobsContainer = () => {
 
   useEffect(() => {
     getJobs();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
