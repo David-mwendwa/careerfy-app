@@ -1,4 +1,4 @@
-import React, { useReducer, useContext, useEffect } from 'react';
+import React, { useReducer, useContext } from 'react';
 import axios from 'axios';
 import {
   DISPLAY_ALERT,
@@ -230,11 +230,6 @@ const AppProvider = ({ children }) => {
     }
     clearAlert();
   };
-
-  useEffect(() => {
-    getJobs();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <AppContext.Provider
