@@ -72,7 +72,7 @@ const showStats = async (req, res) => {
 
   const defaultStats = {
     pending: stats.pending || 0,
-    interview: stats.inteview || 0,
+    interview: stats.interview || 0,
     declined: stats.declined || 0,
   };
 
