@@ -12,8 +12,12 @@ const getAllJobs = async (req, res) => {
     createdBy: req.user.userId,
   };
 
+  // add stuff based on condition
   if (status !== 'all') {
     queryObject.status = status;
+  }
+  if (status !== 'all') {
+    queryObject.jobType = jobType;
   }
 
   let results = Job.find(queryObject);
