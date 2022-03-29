@@ -3,7 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { BadRequestError, NotFoundError } from '../errors/index.js';
 import checkPermissions from '../utils/checkPermissions.js';
 import mongoose from 'mongoose';
-import moment from 'moment';
+import moment from 'moment'; 
 
 const getAllJobs = async (req, res) => {
   const { status, jobType, sort, search } = req.query;
@@ -13,32 +13,33 @@ const getAllJobs = async (req, res) => {
   };
 
   // add stuff based on condition
-  if (status !== 'all') {
+  if (status && status !== 'all') {
     queryObject.status = status;
   }
-  if (status !== 'all') {
+  if (jobType && jobType !== 'all') {
     queryObject.jobType = jobType;
   }
   if (search) {
     queryObject.position = { $regex: search, $options: 'i' };
   }
 
+  let result = Job.find(queryObject);
+
   // chain sort conditions
-  let results = Job.find(queryObject);
   if (sort === 'latest') {
-    result = results.sort('-createdAt');
+    result = result.sort('-createdAt');
   }
   if (sort === 'oldest') {
-    result = results.sort('createdAt');
+    result = result.sort('createdAt');
   }
   if (sort === 'a-z') {
-    result = results.sort('position');
+    result = result.sort('position');
   }
   if (sort === 'z-a') {
-    result = results.sort('-position');
+    result = result.sort('-position');
   }
 
-  const jobs = await results;
+  const jobs = await result;
 
   res
     .status(StatusCodes.OK)
