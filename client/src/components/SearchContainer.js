@@ -20,13 +20,12 @@ const SearchContainer = () => {
   const handleSearch = (e) => {
     if (isLoading) return;
     handleChange({ name: e.target.name, value: e.target.value });
-    console.log(e.taget.name);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    clearFilters()
-  }
+    e.preventDefault();
+    clearFilters();
+  };
 
   return (
     <Wrapper>
@@ -59,7 +58,10 @@ const SearchContainer = () => {
             handleChange={handleSearch}
             list={sortOptions}
           />
-          <button className='btn btn-block btn-danger' onClick={handleSubmit}>
+          <button
+            className='btn btn-block btn-danger'
+            disabled={isLoading}
+            onClick={handleSubmit}>
             clear filters
           </button>
         </div>
