@@ -47,9 +47,10 @@ const getAllJobs = async (req, res) => {
 
   const jobs = await result;
 
-  res
-    .status(StatusCodes.OK)
-    .json({ jobs, totalJobs: jobs.length, numOfPages: 1 });
+  const totalJobs = await Job.countDocuments(queryObject);
+  const numOfPages = Math.ceil(totalJobs / limit);
+
+  res.status(StatusCodes.OK).json({ jobs, totalJobs: totalJobs, numOfPages });
 };
 
 const createJob = async (req, res) => {
