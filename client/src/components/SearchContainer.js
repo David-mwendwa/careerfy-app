@@ -59,7 +59,7 @@ const SearchContainer = () => {
             handleChange={handleSearch}
             list={sortOptions}
           />
-          <button className='btn btn-block btn-danger' disabled={isLoading} onClick={handleSubmit}>
+          <button className='btn btn-block btn-danger' onClick={handleSubmit}>
             clear filters
           </button>
         </div>

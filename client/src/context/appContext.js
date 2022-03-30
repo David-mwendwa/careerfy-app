@@ -28,6 +28,7 @@ import {
   EDIT_JOB_ERROR,
   SHOW_STATS_BEGIN,
   SHOW_STATS_SUCCESS,
+  CLEAR_FILTERS,
 } from './actions';
 
 import reducer from './reducer';
@@ -297,12 +298,12 @@ const AppProvider = ({ children }) => {
       console.log(error.response);
       // logoutUser();
     }
-    clearAlert()
+    clearAlert();
   };
 
   const clearFilters = () => {
-    console.log('clear filters')
-  }
+    dispatch({ type: CLEAR_FILTERS });
+  };
 
   return (
     <AppContext.Provider
