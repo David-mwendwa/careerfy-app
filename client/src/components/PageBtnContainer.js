@@ -6,6 +6,11 @@ import Wrapper from '../assets/wrappers/PageBtnContainer';
 const PageBtnContainer = () => {
   const { numOfPages, page } = useAppContext();
 
+  const pages = Array.from({ length: numOfPages }, (_, index) => {
+    return index + 1;
+  });
+  console.log(pages);
+
   const prevPage = () => {
     console.log('prev page');
   };
@@ -18,7 +23,19 @@ const PageBtnContainer = () => {
         <HiChevronDoubleLeft />
         prev
       </button>
-      <div className='btn-container'>buttons</div>
+      <div className='btn-container'>
+        {pages.map((pageNumber) => {
+          return (
+            <button
+              type='button'
+              className={pageNumber === page ? 'pageBtn active' : 'pageBtn'}
+              key={pageNumber}
+              onClick={() => console.log('change page')}>
+              {pageNumber}
+            </button>
+          );
+        })}
+      </div>
       <button className='next-btn' onClick={nextPage}>
         next <HiChevronDoubleRight />
       </button>
