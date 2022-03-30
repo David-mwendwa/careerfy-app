@@ -12,11 +12,22 @@ const PageBtnContainer = () => {
   console.log(pages);
 
   const prevPage = () => {
-    console.log('prev page');
+    let newPage = page - 1;
+    if (newPage < 1) {
+      // newPage = 1
+      newPage = numOfPages; // alternative
+    }
+    changePage(newPage);
   };
   const nextPage = () => {
-    console.log('next page');
+    let newPage = page + 1;
+    if (newPage > numOfPages) {
+      // newPage = numOfPages
+      newPage = 1; // alternative
+    }
+    changePage(newPage);
   };
+  
   return (
     <Wrapper>
       <button className='prev-btn' onClick={prevPage}>
